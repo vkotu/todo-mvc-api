@@ -58,4 +58,21 @@ router.put('/api/todos/:id',function(req,res,next){
   });
 });
 
+router.delete('/api/todos/:id',function(req,res,next){
+  var qry = "delete from todos where id =?";
+  var id = parseInt(req.params.id);
+  mysql.execQuery(qry, [id], function (err, results) {
+    if (!err) {
+      res.send({'status':'success'});
+      res.end();
+    } else {
+      res.send({'status': "error"});
+      res.end();
+    }
+
+  });
+
+});
+
+
 module.exports = router;
